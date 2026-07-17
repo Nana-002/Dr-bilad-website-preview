@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Linkedin, Mail } from "lucide-react";
+import { Instagram, Linkedin, Mail, MessageCircle } from "lucide-react";
 import { NewsletterSignup } from "./NewsletterSignup";
 
 export function SiteFooter() {
@@ -19,7 +19,6 @@ export function SiteFooter() {
           </div>
         </div>
 
-
         <div>
           <p className="eyebrow">Explore</p>
           <ul className="mt-4 space-y-2 text-sm">
@@ -32,7 +31,6 @@ export function SiteFooter() {
           </ul>
         </div>
 
-
         <div>
           <p className="eyebrow">Connect</p>
           <ul className="mt-4 space-y-2 text-sm">
@@ -42,13 +40,24 @@ export function SiteFooter() {
               </a>
             </li>
             <li>
-              <a href="https://instagram.com/" className="inline-flex items-center gap-2 hover:text-gold">
+              <a href="https://instagram.com/meetdrbilad" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-gold">
                 <Instagram size={14} /> @meetdrbilad
               </a>
             </li>
             <li>
-              <a href="https://linkedin.com/" className="inline-flex items-center gap-2 hover:text-gold">
+              <a href="https://linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-gold">
                 <Linkedin size={14} /> Adebisi-Lawal Oladimeji
+              </a>
+            </li>
+            {/* ✅ NEW: WhatsApp */}
+            <li>
+              <a 
+                href="https://wa.me/2348113852226" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 hover:text-gold"
+              >
+                <MessageCircle size={14} /> WhatsApp
               </a>
             </li>
           </ul>
