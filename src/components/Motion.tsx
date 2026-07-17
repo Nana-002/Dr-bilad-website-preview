@@ -281,3 +281,7 @@ export function Counter({ end, duration = 2000, prefix = "", suffix = "", classN
   
   return <span ref={ref} className={className}>{prefix}{count.toLocaleString()}{suffix}</span>;
 }
+/* ---------- <FadeItem> — alias for StaggerItem (backward compatibility) ---------- */
+export function FadeItem({ children, className }: { children: ReactNode; className?: string }) {
+  return StaggerItem({ children, className });
+}
