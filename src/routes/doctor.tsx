@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHeader } from "@/components/PageShell";
-import doctorImg from "@/assets/doctor-clinic.jpg";
+import doctorImg from "@/assets/social-style.jpg";
 
 export const Route = createFileRoute("/doctor")({
   head: () => ({

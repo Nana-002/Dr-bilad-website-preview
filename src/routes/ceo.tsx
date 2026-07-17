@@ -1,8 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHeader } from "@/components/PageShell";
-import couture from "@/assets/couture-groom.jpg";
+import couture from "@/assets/bilad.jpg";
 import craft from "@/assets/couture-craft.jpg";
 import { ArrowUpRight } from "lucide-react";
+import yorubaGroom from "@/assets/couture-style.jpeg";
+import igboGroom from "@/assets/sitting-down.jpg";
+import hausaGroom from "@/assets/couture-groom.jpg";
+import contemporaryGroom from "@/assets/social_style.jpg";
 
 export const Route = createFileRoute("/ceo")({
   head: () => ({
@@ -108,32 +112,32 @@ function CeoPage() {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-border">
-          {[
-            { t: "Yoruba Groom", n: "01" },
-            { t: "Igbo Groom", n: "02" },
-            { t: "Hausa Groom", n: "03" },
-            { t: "Contemporary", n: "04" },
-          ].map((g) => (
-            <div
-              key={g.t}
-              className="bg-background aspect-[3/4] relative overflow-hidden group"
-            >
-              <img
-                src={couture}
-                alt={g.t}
-                loading="lazy"
-                className="w-full h-full object-cover grayscale-[25%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
-              <div className="absolute inset-0 p-5 flex flex-col justify-between">
-                <span className="text-[10px] tracking-[0.3em] text-gold">
-                  {g.n}
-                </span>
-                <p className="font-display text-xl">{g.t}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+  {[
+    { t: "Yoruba Groom", n: "01", img: yorubaGroom },
+    { t: "Igbo Groom", n: "02", img: igboGroom },
+    { t: "Hausa Groom", n: "03", img: hausaGroom },
+    { t: "Contemporary", n: "04", img: contemporaryGroom },
+  ].map((g) => (
+    <div
+      key={g.t}
+      className="bg-background aspect-[3/4] relative overflow-hidden group"
+    >
+      <img
+        src={g.img}   // ← Now each one uses its own image!
+        alt={g.t}
+        loading="lazy"
+        className="w-full h-full object-cover grayscale-[25%] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
+      <div className="absolute inset-0 p-5 flex flex-col justify-between">
+        <span className="text-[10px] tracking-[0.3em] text-gold">
+          {g.n}
+        </span>
+        <p className="font-display text-xl">{g.t}</p>
+      </div>
+    </div>
+  ))}
+</div>
       </section>
 
       {/* Lessons */}

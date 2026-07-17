@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageHeader } from "@/components/PageShell";
-import fitness from "@/assets/creator-fitness.jpg";
+import fitness from "@/assets/social.jpg";
 import { Dumbbell, Briefcase, Stethoscope, Brain } from "lucide-react";
 
 export const Route = createFileRoute("/creator")({
