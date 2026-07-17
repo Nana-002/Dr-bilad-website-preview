@@ -1,10 +1,24 @@
 import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
 import { SiteNav } from "./SiteNav";
 import { SiteFooter } from "./SiteFooter";
 import { PageTransition, Reveal } from "./Motion";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronUp } from "lucide-react";
 
 export function PageShell({ children }: { children: ReactNode }) {
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setShowScrollTop(window.scrollY > 500);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteNav />
@@ -12,44 +26,53 @@ export function PageShell({ children }: { children: ReactNode }) {
         <main className="pt-16 md:pt-20">{children}</main>
       </PageTransition>
       <SiteFooter />
+      
+      {/* Scroll to top button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            onClick={scrollToTop}
+            className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-gradient-to-br from-navy-vivid to-navy-glow text-white flex items-center justify-center shadow-lg hover:shadow-[0_0_30px_rgba(0,102,255,0.4)] transition-shadow"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <ChevronUp size={20} />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
 
 export function PageHeader({
-  eyebrow,
   title,
-  intro,
+  subtitle,
+  eyebrow,
 }: {
-  eyebrow: string;
-  title: ReactNode;
-  intro?: string;
+  title: string;
+  subtitle?: string;
+  eyebrow?: string;
 }) {
   return (
-    <section className="container-x pt-20 md:pt-28 pb-16 md:pb-24 border-l-2 border-navy-soft/50 pl-6 md:pl-10">
-      <motion.p
-        className="eyebrow"
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      >
-        {eyebrow}
-      </motion.p>
-      <motion.h1
-        className="display-lg mt-6 max-w-4xl"
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-      >
-        {title}
-      </motion.h1>
-      {intro && (
+    <header className="container-x pt-24 md:pt-32 pb-12 md:pb-20">
+      {eyebrow && (
+        <Reveal>
+          <p className="eyebrow">{eyebrow}</p>
+        </Reveal>
+      )}
+      <Reveal delay={0.1}>
+        <h1 className="display-lg mt-6 max-w-4xl">{title}</h1>
+      </Reveal>
+      {subtitle && (
         <Reveal delay={0.2}>
-          <p className="mt-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">
-            {intro}
+          <p className="mt-6 max-w-2xl text-muted-foreground leading-relaxed">
+            {subtitle}
           </p>
         </Reveal>
       )}
-    </section>
+    </header>
   );
 }
